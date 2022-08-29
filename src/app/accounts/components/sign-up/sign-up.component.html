@@ -1,0 +1,59 @@
+<h1>Sign Up</h1>
+<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.form)">
+  <div>
+    <p>
+      UserName:
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="userName"
+        #userNameFormControl="ngModel"
+        required
+      />
+    </p>
+    <div *ngIf="userNameFormControl.errors">
+      <output *ngIf="userNameFormControl.errors['required']"
+        >User Name is required
+      </output>
+    </div>
+
+    <p>
+      Password:
+      <input
+        type="text"
+        name="password"
+        [(ngModel)]="password"
+        #passwordFormControl="ngModel"
+        required
+      />
+    </p>
+    <div *ngIf="passwordFormControl.errors">
+      <output *ngIf="passwordFormControl.errors['required']"
+        >Password is required
+      </output>
+    </div>
+    <p>
+      Email:
+      <input
+        type="text"
+        name="email"
+        [(ngModel)]="email"
+        #emailFormControl="ngModel"
+        required
+        [pattern]="emailPattern"
+      />
+    </p>
+    <div *ngIf="emailFormControl.errors">
+      <div *ngIf="emailFormControl.errors['required']">Email is required.</div>
+      <div *ngIf="emailFormControl.errors['pattern']">Email not valid.</div>
+    </div>
+    <div>
+      <input type="submit" value="SignUp" formnovalidate />
+      <input
+        type="button"
+        value="Clear"
+        (click)="clearForm(signUpForm.form)"
+      />
+    </div>
+  </div>
+</form>
